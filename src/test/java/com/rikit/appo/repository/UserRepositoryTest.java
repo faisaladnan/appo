@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.rikit.appo.entity.User;
+import com.rikit.appo.entity.UserState;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -26,12 +27,16 @@ public class UserRepositoryTest {
 		User user = new User();
 		user.setEmail("user@email.com");
 		user.setPassword("123456");
+		user.setState(UserState.INIT);
+		user.setVerificationCode("123456");
 		
 		entityManager.persist(user);
 		
-		User foundUser = userRepository.findByEmail("user@email.com");
+		User foundUser = userRepository.findByEmail(user.getEmail());
 		Assert.assertNotNull(foundUser.getId());
-		Assert.assertEquals(foundUser.getEmail(), "user@email.com");
-		Assert.assertEquals(foundUser.getPassword(), "123456");
+		Assert.assertEquals(user.getEmail(), foundUser.getEmail());
+		Assert.assertEquals(user.getPassword(), foundUser.getPassword());
+		Assert.assertEquals(user.getState(), foundUser.getState());
+		Assert.assertEquals(user.getVerificationCode(), foundUser.getVerificationCode());
 	}
 }
