@@ -4,5 +4,6 @@ import com.rikit.appo.entity.User;
 
 public interface UserService {
 
-	public User createUser(String email, String password);
+	public User register(String email, String password);
+	public boolean verify(String code);
 }

@@ -6,9 +6,15 @@ import com.rikit.appo.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public User createUser(String email, String password) {
+	public User register(String email, String password) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean verify(String code) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
